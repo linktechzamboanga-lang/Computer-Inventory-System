@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Computer Inventory System</title>
+
+<link rel="stylesheet" href="css/inventory.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-animation">
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="container">
+
+<!-- =============== SIDEBAR =============== -->
+
+<aside class="sidebar">
+
+<div class="logo">
+    💻
+    <h2>CIS</h2>
+</div>
+
+<ul>
+
+<li class="active" onclick="showSection('dashboard')">
+🏠 Dashboard
+</li>
+
+<li onclick="showSection('inventory')">
+🖥 Inventory
+</li>
+
+<li onclick="showSection('request')">
+📋 Request
+</li>
+
+<li onclick="showSection('schedule')">
+📅 Schedule
+</li>
+
+<li onclick="showSection('reports')">
+📄 Reports
+</li>
+
+<li onclick="showSection('ai')">
+🤖 AI Helper
+</li>
+
+</ul>
+
+<div class="user-box">
+    <h4 id="adminName">Administrator</h4>
+    <p id="adminRole">System Admin</p>
+
+    <button class="logout-btn" onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+</aside>
+
+<!-- =============== MAIN CONTENT =============== -->
+
+<main class="main">
+
+<!-- Header -->
+
+<header class="topbar">
+
+<div>
+
+<h1>Computer Inventory System</h1>
+
+<p>
+Real-time Inventory Management Dashboard
+</p>
+
+</div>
+
+<div class="header-right">
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search Control Number or Name..."
+onkeyup="searchInventory()">
+
+</div>
+
+<div class="notification">
+🔔
+<span id="notifCount">3</span>
+</div>
+
+</div>
+
+</header>
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboard" class="content-section active">
+
+<div class="filters">
+
+<select id="filterYear" onchange="loadDashboard()">
+<option>2026</option>
+<option>2025</option>
+</select>
+
+<select id="filterMonth" onchange="loadDashboard()">
+<option>All Month</option>
+<option>January</option>
+<option>February</option>
+<option>March</option>
+<option>April</option>
+<option>May</option>
+<option>June</option>
+<option>July</option>
+<option selected>August</option>
+</select>
+
+<select id="filterWeek" onchange="loadDashboard()">
+<option>All Week</option>
+<option>Week 1</option>
+<option>Week 2</option>
+<option>Week 3</option>
+<option>Week 4</option>
+</select>
+
+</div>
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Computers</h3>
+<h1 id="totalComputers">0</h1>
+<p>Registered Units</p>
+</div>
+
+<div class="card">
+<h3>Working</h3>
+<h1 id="workingCount">0</h1>
+<p class="green">Operational</p>
+</div>
+
+<div class="card">
+<h3>Maintenance</h3>
+<h1 id="maintenanceCount">0</h1>
+<p class="orange">Needs Repair</p>
+</div>
+
+<div class="card">
+<h3>Pull-out</h3>
+<h1 id="pulloutCount">0</h1>
+<p class="red">Out of Service</p>
+</div>
+
+</div>
+
+<!-- Charts -->
+
+<div class="chart-grid">
+
+<div class="chart-card">
+<h3>Computer Types</h3>
+<canvas id="typeChart"></canvas>
+</div>
+
+<div class="chart-card">
+<h3>Overall Conditions</h3>
+<canvas id="statusChart"></canvas>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= INVENTORY ================= -->
+
+<section id="inventory" class="content-section">
+
+<div class="section-header">
+
+<h2>Computer Inventory</h2>
+
+<div>
+
+<button onclick="openModal()">
+＋ Add Computer
+</button>
+
+<button onclick="loadInventory()">
+↻ Refresh
+</button>
+
+<button onclick="printInventory()">
+🖨 Print
+</button>
+
+<button onclick="downloadPDF()">
+⬇ PDF
+</button>
+
+</div>
+
+</div>
+
+<div class="table-container">
+
+<table id="inventoryTable">
+
+<thead>
+
+<tr>
+
+<th>Control #</th>
+<th>Custodian</th>
+<th>Department</th>
+<th>Type</th>
+<th>Brand</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="inventoryBody">
+
+<!-- JS DATA -->
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ================= REQUEST ================= -->
+
+<section id="request" class="content-section">
+
+<div class="section-header">
+
+<h2>Equipment Request</h2>
+
+<button onclick="loadRequests()">
+Refresh
+</button>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Control</th>
+<th>Name</th>
+<th>Department</th>
+<th>Item</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="requestBody"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ================= SCHEDULE ================= -->
+
+<section id="schedule" class="content-section">
+
+<div class="section-header">
+
+<h2>Preventive Maintenance Schedule</h2>
+
+<button onclick="loadSchedule()">
+Refresh
+</button>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Branch</th>
+<th>Date Start</th>
+<th>Date End</th>
+<th>Personnel</th>
+<th>Purpose</th>
+
+</tr>
+
+</thead>
+
+<tbody id="scheduleBody"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ================= REPORT ================= -->
+
+<section id="reports" class="content-section">
+
+<h2>Reports Center</h2>
+
+<div class="report-grid">
+
+<div class="report-card">
+
+<h3>Monthly Inventory</h3>
+
+<p>
+Generate complete monthly report
+</p>
+
+<button onclick="generateMonthlyReport()">
+Generate
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>Department Report</h3>
+
+<p>
+Summary by department
+</p>
+
+<button>
+Generate
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>Status Report</h3>
+
+<p>
+Working / Maintenance / Pull-out
+</p>
+
+<button>
+Generate
+</button>
+
+</div>
+
+<div class="report-card">
+
+<h3>Schedule Report</h3>
+
+<p>
+Preventive maintenance schedule
+</p>
+
+<button>
+Generate
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= AI ================= -->
+
+<section id="ai" class="content-section">
+
+<div class="ai-box">
+
+<h2>🤖 AI Inventory Assistant</h2>
+
+<p>
+Generate intelligent inventory reports using your Google Sheets data.
+</p>
+
+<textarea
+id="aiPrompt"
+placeholder="Example: Generate August 2026 executive inventory report..."></textarea>
+
+<button onclick="generateAIReport()">
+Generate Report
+</button>
+
+<div id="aiResult"></div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="inventoryModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>Add Inventory</h2>
+
+<span onclick="closeModal()">✖</span>
+
+</div>
+
+<div class="form-grid">
+
+<input id="computerID" placeholder="Computer ID">
+
+<input id="controlNumber" placeholder="Control Number">
+
+<input id="custodianName" placeholder="Custodian Name">
+
+<input id="department" placeholder="Department">
+
+<select id="itemType">
+
+<option>Desktop</option>
+<option>Laptop</option>
+<option>Printer</option>
+<option>Server</option>
+
+</select>
+
+<input id="brand" placeholder="Brand">
+
+<input id="model" placeholder="Model">
+
+<input id="serialNumber" placeholder="Serial Number">
+
+<input type="date" id="purchaseDate">
+
+<input id="location" placeholder="Location">
+
+<select id="status">
+
+<option>Working</option>
+<option>Maintenance</option>
+<option>Pull-out</option>
+
+</select>
+
+<textarea
+id="remarks"
+placeholder="Remarks"></textarea>
+
+</div>
+
+<div class="modal-footer">
+
+<button onclick="saveInventory()">
+Save
+</button>
+
+<button class="cancel" onclick="closeModal()">
+Cancel
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Floating AI Button -->
+
+<button class="floating-ai" onclick="showSection('ai')">
+🤖
+</button>
+
+<script src="js/inventory.js"></script>
+
+</body>
+</html>
