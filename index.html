@@ -1,518 +1,1049 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Computer Inventory System</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="css/inventory.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta
+        name="description"
+        content="Computer Inventory Management System"
+    >
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta
+        name="theme-color"
+        content="#ffffff"
+    >
+
+    <title>
+        Computer Inventory System
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         CHART.JS
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js">
+    </script>
+
+
+    <!-- =====================================================
+         APPLICATION CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/inventory.css"
+    >
 
 </head>
+
+
 <body>
 
-<!-- Animated Background -->
-<div class="bg-animation">
-    <span></span><span></span><span></span><span></span><span></span>
-</div>
 
-<div class="container">
+<!-- =========================================================
+     BACKGROUND ANIMATION
+========================================================= -->
 
-<!-- =============== SIDEBAR =============== -->
+<div class="background-animation">
 
-<aside class="sidebar">
-
-<div class="logo">
-    💻
-    <h2>CIS</h2>
-</div>
-
-<ul>
-
-<li class="active" onclick="showSection('dashboard')">
-🏠 Dashboard
-</li>
-
-<li onclick="showSection('inventory')">
-🖥 Inventory
-</li>
-
-<li onclick="showSection('request')">
-📋 Request
-</li>
-
-<li onclick="showSection('schedule')">
-📅 Schedule
-</li>
-
-<li onclick="showSection('reports')">
-📄 Reports
-</li>
-
-<li onclick="showSection('ai')">
-🤖 AI Helper
-</li>
-
-</ul>
-
-<div class="user-box">
-    <h4 id="adminName">Administrator</h4>
-    <p id="adminRole">System Admin</p>
-
-    <button class="logout-btn" onclick="logout()">
-        Logout
-    </button>
+    <span class="floating-circle circle-1"></span>
+    <span class="floating-circle circle-2"></span>
+    <span class="floating-circle circle-3"></span>
+    <span class="floating-circle circle-4"></span>
+    <span class="floating-circle circle-5"></span>
 
 </div>
+
+
+
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
+
+<section
+    id="loginScreen"
+    class="login-screen"
+>
+
+    <div class="login-container">
+
+
+        <!-- LOGO -->
+
+        <div class="login-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-computer"></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="login-header">
+
+            <h1>
+                Computer Inventory
+            </h1>
+
+            <p>
+                Management System
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+
+            <div class="login-card-title">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to access the dashboard
+                </p>
+
+            </div>
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                id="loginForm"
+                autocomplete="off"
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="loginUsername">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Username
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i
+                            class="fa-solid fa-user input-icon">
+                        </i>
+
+
+                        <input
+                            type="text"
+                            id="loginUsername"
+                            name="username"
+                            placeholder="Enter username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i
+                            class="fa-solid fa-lock input-icon">
+                        </i>
+
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOGIN ERROR -->
+
+                <div
+                    id="loginError"
+                    class="login-message error-message"
+                    style="display:none;"
+                >
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <span id="loginErrorText">
+                        Invalid username or password.
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN SUCCESS -->
+
+                <div
+                    id="loginSuccess"
+                    class="login-message success-message"
+                    style="display:none;"
+                >
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span>
+                        Login successful.
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="primary-button login-button"
+                >
+
+                    <span
+                        id="loginButtonText"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Sign In
+
+                    </span>
+
+
+                    <span
+                        id="loginLoader"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Signing in...
+
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+            <div class="login-footer">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Authorized users only
+
+            </div>
+
+        </div>
+
+
+        <div class="login-copyright">
+
+            © <span id="loginYear"></span>
+            Computer Inventory System
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+     HIDDEN UNTIL LOGIN
+========================================================= -->
+
+<div
+    id="appContainer"
+    class="app-container"
+    style="display:none;"
+>
+
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside
+    id="sidebar"
+    class="sidebar"
+>
+
+
+    <!-- SIDEBAR BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="brand-icon">
+
+            <i class="fa-solid fa-computer"></i>
+
+        </div>
+
+
+        <div class="brand-text">
+
+            <strong>
+                Computer
+            </strong>
+
+            <span>
+                Inventory System
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="sidebarClose"
+            class="sidebar-close"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- USER PROFILE -->
+
+    <div class="sidebar-user">
+
+        <div class="user-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+
+        <div class="user-details">
+
+            <strong
+                id="sidebarEmployeeName"
+            >
+                User
+            </strong>
+
+            <span
+                id="sidebarUserRole"
+            >
+                User
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-navigation">
+
+
+        <button
+            type="button"
+            class="nav-item active"
+            data-section="dashboardSection"
+        >
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>
+                Dashboard
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="inventorySection"
+        >
+
+            <i class="fa-solid fa-desktop"></i>
+
+            <span>
+                Inventory
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="requestSection"
+        >
+
+            <i class="fa-solid fa-file-circle-plus"></i>
+
+            <span>
+                Requests
+            </span>
+
+            <span
+                id="requestBadge"
+                class="nav-badge"
+                style="display:none;"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="scheduleSection"
+        >
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            <span>
+                Schedule
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="reportsSection"
+        >
+
+            <i class="fa-solid fa-file-pdf"></i>
+
+            <span>
+                Reports
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="aiSection"
+        >
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            <span>
+                AI Helper
+            </span>
+
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <button
+            type="button"
+            id="refreshButton"
+            class="sidebar-action"
+        >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            <span>
+                Refresh Data
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            id="logoutButton"
+            class="sidebar-action logout-action"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+
+    </div>
 
 </aside>
 
-<!-- =============== MAIN CONTENT =============== -->
 
-<main class="main">
 
-<!-- Header -->
 
-<header class="topbar">
 
-<div>
+<!-- =========================================================
+     MOBILE OVERLAY
+========================================================= -->
 
-<h1>Computer Inventory System</h1>
+<div
+    id="sidebarOverlay"
+    class="sidebar-overlay"
+></div>
 
-<p>
-Real-time Inventory Management Dashboard
-</p>
 
-</div>
 
-<div class="header-right">
 
-<div class="search-box">
 
-<input
-type="text"
-id="searchInput"
-placeholder="Search Control Number or Name..."
-onkeyup="searchInventory()">
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
 
-</div>
+<main class="main-content">
 
-<div class="notification">
-🔔
-<span id="notifCount">3</span>
-</div>
 
-</div>
+<!-- =========================================================
+     TOP HEADER
+========================================================= -->
+
+<header class="top-header">
+
+
+    <div class="header-left">
+
+
+        <button
+            type="button"
+            id="sidebarToggle"
+            class="mobile-menu-button"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <div>
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+            <p id="pageSubtitle">
+                Computer inventory overview
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="global-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="search"
+                id="globalSearch"
+                placeholder="Search control number or custodian..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="header-user">
+
+            <div class="header-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="header-user-info">
+
+                <strong
+                    id="headerEmployeeName"
+                >
+                    User
+                </strong>
+
+                <span
+                    id="headerUserRole"
+                >
+                    User
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </header>
 
-<!-- ================= DASHBOARD ================= -->
 
-<section id="dashboard" class="content-section active">
 
-<div class="filters">
 
-<select id="filterYear" onchange="loadDashboard()">
-<option>2026</option>
-<option>2025</option>
-</select>
 
-<select id="filterMonth" onchange="loadDashboard()">
-<option>All Month</option>
-<option>January</option>
-<option>February</option>
-<option>March</option>
-<option>April</option>
-<option>May</option>
-<option>June</option>
-<option>July</option>
-<option selected>August</option>
-</select>
+<!-- =========================================================
+     DASHBOARD SECTION
+========================================================= -->
 
-<select id="filterWeek" onchange="loadDashboard()">
-<option>All Week</option>
-<option>Week 1</option>
-<option>Week 2</option>
-<option>Week 3</option>
-<option>Week 4</option>
-</select>
+<section
+    id="dashboardSection"
+    class="content-section active-section"
+>
 
-</div>
 
-<!-- Cards -->
+    <!-- WELCOME -->
 
-<div class="cards">
+    <div class="welcome-banner">
 
-<div class="card">
-<h3>Total Computers</h3>
-<h1 id="totalComputers">0</h1>
-<p>Registered Units</p>
-</div>
+        <div class="welcome-content">
 
-<div class="card">
-<h3>Working</h3>
-<h1 id="workingCount">0</h1>
-<p class="green">Operational</p>
-</div>
+            <span class="welcome-label">
 
-<div class="card">
-<h3>Maintenance</h3>
-<h1 id="maintenanceCount">0</h1>
-<p class="orange">Needs Repair</p>
-</div>
+                <i class="fa-solid fa-wave-square"></i>
 
-<div class="card">
-<h3>Pull-out</h3>
-<h1 id="pulloutCount">0</h1>
-<p class="red">Out of Service</p>
-</div>
+                SYSTEM OVERVIEW
 
-</div>
+            </span>
 
-<!-- Charts -->
 
-<div class="chart-grid">
+            <h2>
 
-<div class="chart-card">
-<h3>Computer Types</h3>
-<canvas id="typeChart"></canvas>
-</div>
+                Welcome,
+                <span id="welcomeEmployee">
+                    User
+                </span>
 
-<div class="chart-card">
-<h3>Overall Conditions</h3>
-<canvas id="statusChart"></canvas>
-</div>
+            </h2>
 
-</div>
 
-</section>
+            <p>
+                Monitor and manage your organization's
+                computer inventory from one centralized dashboard.
+            </p>
 
-<!-- ================= INVENTORY ================= -->
+        </div>
 
-<section id="inventory" class="content-section">
 
-<div class="section-header">
+        <div class="welcome-icon">
 
-<h2>Computer Inventory</h2>
+            <i class="fa-solid fa-network-wired"></i>
 
-<div>
+        </div>
 
-<button onclick="openModal()">
-＋ Add Computer
-</button>
+    </div>
 
-<button onclick="loadInventory()">
-↻ Refresh
-</button>
 
-<button onclick="printInventory()">
-🖨 Print
-</button>
 
-<button onclick="downloadPDF()">
-⬇ PDF
-</button>
+    <!-- FILTERS -->
 
-</div>
+    <div class="filter-card">
 
-</div>
+        <div class="filter-title">
 
-<div class="table-container">
+            <i class="fa-solid fa-filter"></i>
 
-<table id="inventoryTable">
+            Dashboard Filters
 
-<thead>
+        </div>
 
-<tr>
 
-<th>Control #</th>
-<th>Custodian</th>
-<th>Department</th>
-<th>Type</th>
-<th>Brand</th>
-<th>Status</th>
-<th>Action</th>
+        <div class="filter-grid">
 
-</tr>
 
-</thead>
+            <div class="filter-group">
 
-<tbody id="inventoryBody">
+                <label for="filterYear">
+                    Year
+                </label>
 
-<!-- JS DATA -->
+                <select id="filterYear">
 
-</tbody>
+                    <option value="">
+                        All Year
+                    </option>
 
-</table>
+                </select>
 
-</div>
+            </div>
 
-</section>
 
-<!-- ================= REQUEST ================= -->
+            <div class="filter-group">
 
-<section id="request" class="content-section">
+                <label for="filterMonth">
+                    Month
+                </label>
 
-<div class="section-header">
+                <select id="filterMonth">
 
-<h2>Equipment Request</h2>
+                    <option value="">
+                        All Month
+                    </option>
 
-<button onclick="loadRequests()">
-Refresh
-</button>
+                    <option value="January">
+                        January
+                    </option>
 
-</div>
+                    <option value="February">
+                        February
+                    </option>
 
-<div class="table-container">
+                    <option value="March">
+                        March
+                    </option>
 
-<table>
+                    <option value="April">
+                        April
+                    </option>
 
-<thead>
+                    <option value="May">
+                        May
+                    </option>
 
-<tr>
+                    <option value="June">
+                        June
+                    </option>
 
-<th>ID</th>
-<th>Control</th>
-<th>Name</th>
-<th>Department</th>
-<th>Item</th>
-<th>Status</th>
+                    <option value="July">
+                        July
+                    </option>
 
-</tr>
+                    <option value="August">
+                        August
+                    </option>
 
-</thead>
+                    <option value="September">
+                        September
+                    </option>
 
-<tbody id="requestBody"></tbody>
+                    <option value="October">
+                        October
+                    </option>
 
-</table>
+                    <option value="November">
+                        November
+                    </option>
 
-</div>
+                    <option value="December">
+                        December
+                    </option>
 
-</section>
+                </select>
 
-<!-- ================= SCHEDULE ================= -->
+            </div>
 
-<section id="schedule" class="content-section">
 
-<div class="section-header">
+            <div class="filter-group">
 
-<h2>Preventive Maintenance Schedule</h2>
+                <label for="filterWeek">
+                    Week
+                </label>
 
-<button onclick="loadSchedule()">
-Refresh
-</button>
+                <select id="filterWeek">
 
-</div>
+                    <option value="">
+                        All Week
+                    </option>
 
-<div class="table-container">
+                    <option value="Week 1">
+                        Week 1
+                    </option>
 
-<table>
+                    <option value="Week 2">
+                        Week 2
+                    </option>
 
-<thead>
+                    <option value="Week 3">
+                        Week 3
+                    </option>
 
-<tr>
+                    <option value="Week 4">
+                        Week 4
+                    </option>
 
-<th>Branch</th>
-<th>Date Start</th>
-<th>Date End</th>
-<th>Personnel</th>
-<th>Purpose</th>
+                    <option value="Week 5">
+                        Week 5
+                    </option>
 
-</tr>
+                </select>
 
-</thead>
+            </div>
 
-<tbody id="scheduleBody"></tbody>
 
-</table>
+            <div class="filter-group">
 
-</div>
+                <label for="filterStatus">
+                    Status
+                </label>
 
-</section>
+                <select id="filterStatus">
 
-<!-- ================= REPORT ================= -->
+                    <option value="">
+                        All Status
+                    </option>
 
-<section id="reports" class="content-section">
+                    <option value="Working">
+                        Working
+                    </option>
 
-<h2>Reports Center</h2>
+                    <option value="Maintenance">
+                        Maintenance
+                    </option>
 
-<div class="report-grid">
+                    <option value="Pull-out">
+                        Pull-out
+                    </option>
 
-<div class="report-card">
+                    <option value="Defective">
+                        Defective
+                    </option>
 
-<h3>Monthly Inventory</h3>
+                    <option value="Disposed">
+                        Disposed
+                    </option>
 
-<p>
-Generate complete monthly report
-</p>
+                </select>
 
-<button onclick="generateMonthlyReport()">
-Generate
-</button>
+            </div>
 
-</div>
 
-<div class="report-card">
+            <button
+                type="button"
+                id="applyFiltersButton"
+                class="primary-button filter-button"
+            >
 
-<h3>Department Report</h3>
+                <i class="fa-solid fa-filter"></i>
 
-<p>
-Summary by department
-</p>
+                Apply
 
-<button>
-Generate
-</button>
+            </button>
 
-</div>
 
-<div class="report-card">
+            <button
+                type="button"
+                id="clearFiltersButton"
+                class="secondary-button filter-button"
+            >
 
-<h3>Status Report</h3>
+                <i class="fa-solid fa-rotate-left"></i>
 
-<p>
-Working / Maintenance / Pull-out
-</p>
+                Reset
 
-<button>
-Generate
-</button>
+            </button>
 
-</div>
+        </div>
 
-<div class="report-card">
+    </div>
 
-<h3>Schedule Report</h3>
 
-<p>
-Preventive maintenance schedule
-</p>
 
-<button>
-Generate
-</button>
+    <!-- STATISTICS -->
 
-</div>
+    <div class="stats-grid">
 
-</div>
 
-</section>
+        <div class="stat-card">
 
-<!-- ================= AI ================= -->
+            <div class="stat-icon">
 
-<section id="ai" class="content-section">
+                <i class="fa-solid fa-computer"></i>
 
-<div class="ai-box">
+            </div>
 
-<h2>🤖 AI Inventory Assistant</h2>
+            <div class="stat-content">
 
-<p>
-Generate intelligent inventory reports using your Google Sheets data.
-</p>
+                <span>
+                    Total Computers
+                </span>
 
-<textarea
-id="aiPrompt"
-placeholder="Example: Generate August 2026 executive inventory report..."></textarea>
+                <strong id="totalComputers">
+                    0
+                </strong>
 
-<button onclick="generateAIReport()">
-Generate Report
-</button>
+            </div>
 
-<div id="aiResult"></div>
+        </div>
 
-</div>
 
-</section>
+        <div class="stat-card">
 
-</main>
+            <div class="stat-icon success">
 
-</div>
+                <i class="fa-solid fa-circle-check"></i>
 
-<!-- ================= MODAL ================= -->
+            </div>
 
-<div class="modal" id="inventoryModal">
+            <div class="stat-content">
 
-<div class="modal-content">
+                <span>
+                    Working
+                </span>
 
-<div class="modal-header">
+                <strong id="workingComputers">
+                    0
+                </strong>
 
-<h2>Add Inventory</h2>
+            </div>
 
-<span onclick="closeModal()">✖</span>
+        </div>
 
-</div>
 
-<div class="form-grid">
+        <div class="stat-card">
 
-<input id="computerID" placeholder="Computer ID">
+            <div class="stat-icon warning">
 
-<input id="controlNumber" placeholder="Control Number">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
 
-<input id="custodianName" placeholder="Custodian Name">
+            </div>
 
-<input id="department" placeholder="Department">
+            <div class="stat-content">
 
-<select id="itemType">
+                <span>
+                    Maintenance
+                </span>
 
-<option>Desktop</option>
-<option>Laptop</option>
-<option>Printer</option>
-<option>Server</option>
+                <strong id="maintenanceComputers">
+                    0
+                </strong>
 
-</select>
+            </div>
 
-<input id="brand" placeholder="Brand">
+        </div>
 
-<input id="model" placeholder="Model">
 
-<input id="serialNumber" placeholder="Serial Number">
+        <div class="stat-card">
 
-<input type="date" id="purchaseDate">
+            <div class="stat-icon danger">
 
-<input id="location" placeholder="Location">
+                <i class="fa-solid fa-box-open"></i>
 
-<select id="status">
+            </div>
 
-<option>Working</option>
-<option>Maintenance</option>
-<option>Pull-out</option>
+            <div class="stat-content">
 
-</select>
+                <span>
+                    Pull-out
+                </span>
 
-<textarea
-id="remarks"
-placeholder="Remarks"></textarea>
+                <strong id="pulloutComputers">
+                    0
+                </strong>
 
-</div>
+            </div>
 
-<div class="modal-footer">
+        </div>
 
-<button onclick="saveInventory()">
-Save
-</button>
 
-<button class="cancel" onclick="closeModal()">
-Cancel
-</button>
+        <div class="stat-card">
 
-</div>
+            <div class="stat-icon info">
 
-</div>
-
-</div>
-
-<!-- Floating AI Button -->
-
-<button class="floating-ai" onclick="showSection('ai')">
-🤖
-</button>
-
-<script src="js/inventory.js"></script>
-
-</body>
-</html>
+                <i class="f
