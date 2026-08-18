@@ -1,0 +1,3495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Computer Inventory Management System"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ffffff"
+    >
+
+    <title>
+        Computer Inventory System
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         CHART.JS
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js">
+    </script>
+
+
+    <!-- =====================================================
+         APPLICATION CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/inventory.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     BACKGROUND ANIMATION
+========================================================= -->
+
+<div class="background-animation">
+
+    <span class="floating-circle circle-1"></span>
+    <span class="floating-circle circle-2"></span>
+    <span class="floating-circle circle-3"></span>
+    <span class="floating-circle circle-4"></span>
+    <span class="floating-circle circle-5"></span>
+
+</div>
+
+
+
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
+
+<section
+    id="loginScreen"
+    class="login-screen"
+>
+
+    <div class="login-container">
+
+
+        <!-- LOGO -->
+
+        <div class="login-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-computer"></i>
+
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="login-header">
+
+            <h1>
+                Computer Inventory
+            </h1>
+
+            <p>
+                Management System
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+
+            <div class="login-card-title">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to access the dashboard
+                </p>
+
+            </div>
+
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                id="loginForm"
+                autocomplete="off"
+            >
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="loginUsername">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Username
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i
+                            class="fa-solid fa-user input-icon">
+                        </i>
+
+
+                        <input
+                            type="text"
+                            id="loginUsername"
+                            name="username"
+                            placeholder="Enter username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <i
+                            class="fa-solid fa-lock input-icon">
+                        </i>
+
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOGIN ERROR -->
+
+                <div
+                    id="loginError"
+                    class="login-message error-message"
+                    style="display:none;"
+                >
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <span id="loginErrorText">
+                        Invalid username or password.
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN SUCCESS -->
+
+                <div
+                    id="loginSuccess"
+                    class="login-message success-message"
+                    style="display:none;"
+                >
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span>
+                        Login successful.
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="primary-button login-button"
+                >
+
+                    <span
+                        id="loginButtonText"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Sign In
+
+                    </span>
+
+
+                    <span
+                        id="loginLoader"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Signing in...
+
+                    </span>
+
+                </button>
+
+
+            </form>
+
+
+            <div class="login-footer">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Authorized users only
+
+            </div>
+
+        </div>
+
+
+        <div class="login-copyright">
+
+            © <span id="loginYear"></span>
+            Computer Inventory System
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+     HIDDEN UNTIL LOGIN
+========================================================= -->
+
+<div
+    id="appContainer"
+    class="app-container"
+    style="display:none;"
+>
+
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside
+    id="sidebar"
+    class="sidebar"
+>
+
+
+    <!-- SIDEBAR BRAND -->
+
+    <div class="sidebar-brand">
+
+        <div class="brand-icon">
+
+            <i class="fa-solid fa-computer"></i>
+
+        </div>
+
+
+        <div class="brand-text">
+
+            <strong>
+                Computer
+            </strong>
+
+            <span>
+                Inventory System
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="sidebarClose"
+            class="sidebar-close"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- USER PROFILE -->
+
+    <div class="sidebar-user">
+
+        <div class="user-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+
+        <div class="user-details">
+
+            <strong
+                id="sidebarEmployeeName"
+            >
+                User
+            </strong>
+
+            <span
+                id="sidebarUserRole"
+            >
+                User
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-navigation">
+
+
+        <button
+            type="button"
+            class="nav-item active"
+            data-section="dashboardSection"
+        >
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>
+                Dashboard
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="inventorySection"
+        >
+
+            <i class="fa-solid fa-desktop"></i>
+
+            <span>
+                Inventory
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="requestSection"
+        >
+
+            <i class="fa-solid fa-file-circle-plus"></i>
+
+            <span>
+                Requests
+            </span>
+
+            <span
+                id="requestBadge"
+                class="nav-badge"
+                style="display:none;"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="scheduleSection"
+        >
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            <span>
+                Schedule
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="reportsSection"
+        >
+
+            <i class="fa-solid fa-file-pdf"></i>
+
+            <span>
+                Reports
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-item"
+            data-section="aiSection"
+        >
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            <span>
+                AI Helper
+            </span>
+
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <button
+            type="button"
+            id="refreshButton"
+            class="sidebar-action"
+        >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            <span>
+                Refresh Data
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            id="logoutButton"
+            class="sidebar-action logout-action"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+
+    </div>
+
+</aside>
+
+
+
+
+
+<!-- =========================================================
+     MOBILE OVERLAY
+========================================================= -->
+
+<div
+    id="sidebarOverlay"
+    class="sidebar-overlay"
+></div>
+
+
+
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main-content">
+
+
+<!-- =========================================================
+     TOP HEADER
+========================================================= -->
+
+<header class="top-header">
+
+
+    <div class="header-left">
+
+
+        <button
+            type="button"
+            id="sidebarToggle"
+            class="mobile-menu-button"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <div>
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+            <p id="pageSubtitle">
+                Computer inventory overview
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="global-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="search"
+                id="globalSearch"
+                placeholder="Search control number or custodian..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="header-user">
+
+            <div class="header-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="header-user-info">
+
+                <strong
+                    id="headerEmployeeName"
+                >
+                    User
+                </strong>
+
+                <span
+                    id="headerUserRole"
+                >
+                    User
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+
+
+<!-- =========================================================
+     DASHBOARD SECTION
+========================================================= -->
+
+<section
+    id="dashboardSection"
+    class="content-section active-section"
+>
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome-banner">
+
+        <div class="welcome-content">
+
+            <span class="welcome-label">
+
+                <i class="fa-solid fa-wave-square"></i>
+
+                SYSTEM OVERVIEW
+
+            </span>
+
+
+            <h2>
+
+                Welcome,
+                <span id="welcomeEmployee">
+                    User
+                </span>
+
+            </h2>
+
+
+            <p>
+                Monitor and manage your organization's
+                computer inventory from one centralized dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="welcome-icon">
+
+            <i class="fa-solid fa-network-wired"></i>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FILTERS -->
+
+    <div class="filter-card">
+
+        <div class="filter-title">
+
+            <i class="fa-solid fa-filter"></i>
+
+            Dashboard Filters
+
+        </div>
+
+
+        <div class="filter-grid">
+
+
+            <div class="filter-group">
+
+                <label for="filterYear">
+                    Year
+                </label>
+
+                <select id="filterYear">
+
+                    <option value="">
+                        All Year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="filterMonth">
+                    Month
+                </label>
+
+                <select id="filterMonth">
+
+                    <option value="">
+                        All Month
+                    </option>
+
+                    <option value="January">
+                        January
+                    </option>
+
+                    <option value="February">
+                        February
+                    </option>
+
+                    <option value="March">
+                        March
+                    </option>
+
+                    <option value="April">
+                        April
+                    </option>
+
+                    <option value="May">
+                        May
+                    </option>
+
+                    <option value="June">
+                        June
+                    </option>
+
+                    <option value="July">
+                        July
+                    </option>
+
+                    <option value="August">
+                        August
+                    </option>
+
+                    <option value="September">
+                        September
+                    </option>
+
+                    <option value="October">
+                        October
+                    </option>
+
+                    <option value="November">
+                        November
+                    </option>
+
+                    <option value="December">
+                        December
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="filterWeek">
+                    Week
+                </label>
+
+                <select id="filterWeek">
+
+                    <option value="">
+                        All Week
+                    </option>
+
+                    <option value="Week 1">
+                        Week 1
+                    </option>
+
+                    <option value="Week 2">
+                        Week 2
+                    </option>
+
+                    <option value="Week 3">
+                        Week 3
+                    </option>
+
+                    <option value="Week 4">
+                        Week 4
+                    </option>
+
+                    <option value="Week 5">
+                        Week 5
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="filterStatus">
+                    Status
+                </label>
+
+                <select id="filterStatus">
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option value="Working">
+                        Working
+                    </option>
+
+                    <option value="Maintenance">
+                        Maintenance
+                    </option>
+
+                    <option value="Pull-out">
+                        Pull-out
+                    </option>
+
+                    <option value="Defective">
+                        Defective
+                    </option>
+
+                    <option value="Disposed">
+                        Disposed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="applyFiltersButton"
+                class="primary-button filter-button"
+            >
+
+                <i class="fa-solid fa-filter"></i>
+
+                Apply
+
+            </button>
+
+
+            <button
+                type="button"
+                id="clearFiltersButton"
+                class="secondary-button filter-button"
+            >
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-computer"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Computers
+                </span>
+
+                <strong id="totalComputers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon success">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Working
+                </span>
+
+                <strong id="workingComputers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon warning">
+
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Maintenance
+                </span>
+
+                <strong id="maintenanceComputers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon danger">
+
+                <i class="fa-solid fa-box-open"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Pull-out
+                </span>
+
+                <strong id="pulloutComputers">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon info">
+
+                <i class="fa-solid fa-file-circle-plus"></i>
+
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Requests
+                </span>
+
+                <strong id="totalRequests">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CHARTS -->
+
+    <div class="charts-grid">
+
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <h3>
+                        Computer Types
+                    </h3>
+
+                    <span>
+                        Inventory distribution by type
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chart-column"></i>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="computerTypeChart">
+                </canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <h3>
+                        Computer Status
+                    </h3>
+
+                    <span>
+                        Current inventory condition
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas
+                    id="statusChart">
+                </canvas>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="chart-card chart-wide">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <h3>
+                        Overall Conditions
+                    </h3>
+
+                    <span>
+                        Overall computer condition analysis
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <div class="chart-container large">
+
+                <canvas
+                    id="conditionChart">
+                </canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RECENT INVENTORY -->
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Recent Inventory
+                </h3>
+
+                <span>
+                    Latest computer records
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="secondary-button"
+                data-section="inventorySection"
+                id="viewInventoryButton"
+            >
+
+                View All
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table
+                id="dashboardInventoryTable"
+                class="data-table"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Control Number
+                        </th>
+
+                        <th>
+                            Custodian
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Brand
+                        </th>
+
+                        <th>
+                            Model
+                        </th>
+
+                        <th>
+                            Location
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="dashboardInventoryBody"
+                >
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     INVENTORY SECTION
+========================================================= -->
+
+<section
+    id="inventorySection"
+    class="content-section"
+>
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                COMPUTER ASSET MANAGEMENT
+            </span>
+
+            <h2>
+                Computer Inventory
+            </h2>
+
+            <p>
+                Create, edit, delete, search, print and download
+                computer inventory records.
+            </p>
+
+        </div>
+
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                id="addInventoryButton"
+                class="primary-button admin-only"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Computer
+
+            </button>
+
+
+            <button
+                type="button"
+                id="printInventoryButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-print"></i>
+
+                Print
+
+            </button>
+
+
+            <button
+                type="button"
+                id="downloadInventoryButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Download
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INVENTORY SEARCH -->
+
+    <div class="search-card">
+
+        <div class="search-box-large">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="search"
+                id="inventorySearch"
+                placeholder="Search Control Number, Custodian Name, Department, Brand or Serial Number..."
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INVENTORY TABLE -->
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Inventory Records
+                </h3>
+
+                <span id="inventoryRecordCount">
+                    0 records
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table
+                id="inventoryTable"
+                class="data-table inventory-table"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Computer ID
+                        </th>
+
+                        <th>
+                            Control Number
+                        </th>
+
+                        <th>
+                            Custodian
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Item Type
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Brand
+                        </th>
+
+                        <th>
+                            Model
+                        </th>
+
+                        <th>
+                            Serial Number
+                        </th>
+
+                        <th>
+                            Purchase Date
+                        </th>
+
+                        <th>
+                            Location
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Problem / Complaint
+                        </th>
+
+                        <th>
+                            Recommendation
+                        </th>
+
+                        <th>
+                            Date Pull-out
+                        </th>
+
+                        <th>
+                            Date Return
+                        </th>
+
+                        <th>
+                            Place AT
+                        </th>
+
+                        <th>
+                            Remarks
+                        </th>
+
+                        <th>
+                            Licensed Windows
+                        </th>
+
+                        <th>
+                            Licensed Security
+                        </th>
+
+                        <th>
+                            Checked By
+                        </th>
+
+                        <th>
+                            Date Clean Up
+                        </th>
+
+                        <th>
+                            Scheduled
+                        </th>
+
+                        <th>
+                            Date Request
+                        </th>
+
+                        <th>
+                            Date Checkup
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="inventoryTableBody"
+                >
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     REQUEST SECTION
+========================================================= -->
+
+<section
+    id="requestSection"
+    class="content-section"
+>
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                EQUIPMENT REQUEST MANAGEMENT
+            </span>
+
+            <h2>
+                Computer Requests
+            </h2>
+
+            <p>
+                Manage equipment and computer requests.
+            </p>
+
+        </div>
+
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                id="addRequestButton"
+                class="primary-button admin-only"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Request
+
+            </button>
+
+
+            <button
+                type="button"
+                id="printRequestButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-print"></i>
+
+                Print
+
+            </button>
+
+
+            <button
+                type="button"
+                id="downloadRequestButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Download
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="search-card">
+
+        <div class="search-box-large">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="search"
+                id="requestSearch"
+                placeholder="Search Control Number, Custodian, Department..."
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Request Records
+                </h3>
+
+                <span id="requestRecordCount">
+                    0 records
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table
+                id="requestTable"
+                class="data-table"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Control Number
+                        </th>
+
+                        <th>
+                            Custodian
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Item Type
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Brand
+                        </th>
+
+                        <th>
+                            Location
+                        </th>
+
+                        <th>
+                            Date Request
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Proof Document
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="requestTableBody"
+                >
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     SCHEDULE SECTION
+========================================================= -->
+
+<section
+    id="scheduleSection"
+    class="content-section"
+>
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                ACTIVITY PLANNING
+            </span>
+
+            <h2>
+                Computer Schedule
+            </h2>
+
+            <p>
+                Manage maintenance, inspection and other
+                computer-related schedules.
+            </p>
+
+        </div>
+
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                id="addScheduleButton"
+                class="primary-button admin-only"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Schedule
+
+            </button>
+
+
+            <button
+                type="button"
+                id="printScheduleButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-print"></i>
+
+                Print
+
+            </button>
+
+
+            <button
+                type="button"
+                id="downloadScheduleButton"
+                class="secondary-button"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Download
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="search-card">
+
+        <div class="search-box-large">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="search"
+                id="scheduleSearch"
+                placeholder="Search branch, schedule type, purpose or personnel..."
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <h3>
+                    Schedule Records
+                </h3>
+
+                <span id="scheduleRecordCount">
+                    0 records
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table
+                id="scheduleTable"
+                class="data-table"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Branch
+                        </th>
+
+                        <th>
+                            Date Start
+                        </th>
+
+                        <th>
+                            Date End
+                        </th>
+
+                        <th>
+                            Days
+                        </th>
+
+                        <th>
+                            Type Schedule
+                        </th>
+
+                        <th>
+                            Purpose
+                        </th>
+
+                        <th>
+                            Assigned Personnel
+                        </th>
+
+                        <th>
+                            Task Accomplishment
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="scheduleTableBody"
+                >
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     REPORTS SECTION
+========================================================= -->
+
+<section
+    id="reportsSection"
+    class="content-section"
+>
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                REPORT CENTER
+            </span>
+
+            <h2>
+                Reports
+            </h2>
+
+            <p>
+                Generate printable and downloadable reports.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="report-grid">
+
+
+        <!-- INVENTORY REPORT -->
+
+        <div class="report-card">
+
+            <div class="report-icon">
+
+                <i class="fa-solid fa-file-invoice"></i>
+
+            </div>
+
+
+            <h3>
+                Inventory Report
+            </h3>
+
+
+            <p>
+                Generate a PDF report containing computer
+                inventory records.
+            </p>
+
+
+            <button
+                type="button"
+                id="generateInventoryReportButton"
+                class="primary-button"
+            >
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                Generate PDF
+
+            </button>
+
+        </div>
+
+
+
+        <!-- REQUEST REPORT -->
+
+        <div class="report-card">
+
+            <div class="report-icon">
+
+                <i class="fa-solid fa-file-circle-plus"></i>
+
+            </div>
+
+
+            <h3>
+                Request Report
+            </h3>
+
+
+            <p>
+                Generate a report of computer and equipment
+                requests.
+            </p>
+
+
+            <button
+                type="button"
+                id="generateRequestReportButton"
+                class="primary-button"
+            >
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                Generate PDF
+
+            </button>
+
+        </div>
+
+
+
+        <!-- SCHEDULE REPORT -->
+
+        <div class="report-card">
+
+            <div class="report-icon">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+            </div>
+
+
+            <h3>
+                Schedule Report
+            </h3>
+
+
+            <p>
+                Generate a report of maintenance and
+                scheduled activities.
+            </p>
+
+
+            <button
+                type="button"
+                id="generateScheduleReportButton"
+                class="primary-button"
+            >
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                Generate PDF
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- =========================================================
+     AI HELPER SECTION
+========================================================= -->
+
+<section
+    id="aiSection"
+    class="content-section"
+>
+
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-kicker">
+                INTELLIGENT REPORTING
+            </span>
+
+            <h2>
+                AI Helper
+            </h2>
+
+            <p>
+                Generate an automated analysis of your
+                computer inventory data.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="ai-layout">
+
+
+        <!-- AI PROMPT -->
+
+        <div class="ai-card">
+
+            <div class="ai-card-header">
+
+                <div class="ai-icon">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Report Assistant
+                    </h3>
+
+                    <span>
+                        Inventory analysis assistant
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="aiPrompt">
+
+                    What report would you like to generate?
+
+                </label>
+
+
+                <textarea
+                    id="aiPrompt"
+                    rows="8"
+                    placeholder="Example: Generate an inventory condition report showing working computers, computers under maintenance, pull-out units and recommendations."
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="generateAIButton"
+                class="primary-button"
+            >
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                Generate Report
+
+            </button>
+
+        </div>
+
+
+
+        <!-- AI OUTPUT -->
+
+        <div class="ai-result-card">
+
+            <div class="ai-result-header">
+
+                <div>
+
+                    <h3>
+                        Generated Report
+                    </h3>
+
+                    <span>
+                        Analysis based on current inventory data
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="copyAIReportButton"
+                    class="icon-button"
+                    title="Copy report"
+                >
+
+                    <i class="fa-solid fa-copy"></i>
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="aiReportOutput"
+                class="ai-report-output"
+            >
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <h4>
+                        No report generated
+                    </h4>
+
+                    <p>
+                        Enter a request and click
+                        Generate Report.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+</main>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     INVENTORY MODAL
+========================================================= -->
+
+<div
+    id="inventoryModal"
+    class="modal-overlay"
+    style="display:none;"
+>
+
+    <div class="modal-container large-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    COMPUTER RECORD
+                </span>
+
+                <h2 id="inventoryModalTitle">
+                    Add Computer
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close-modal="inventoryModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+
+        <form
+            id="inventoryForm"
+            class="modal-form"
+        >
+
+            <input
+                type="hidden"
+                id="inventoryComputerID"
+                name="ComputerID"
+            >
+
+
+            <div class="form-section">
+
+                <h3>
+                    Basic Information
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Control Number *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryControlNumber"
+                            name="ControlNumber"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Custodian Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryCustodianName"
+                            name="CustodianName"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryDepartment"
+                            name="Department"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Item Type
+                        </label>
+
+                        <select
+                            id="inventoryItemType"
+                            name="ItemType"
+                        >
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="Desktop">
+                                Desktop
+                            </option>
+
+                            <option value="Laptop">
+                                Laptop
+                            </option>
+
+                            <option value="All-in-One">
+                                All-in-One
+                            </option>
+
+                            <option value="Printer">
+                                Printer
+                            </option>
+
+                            <option value="Monitor">
+                                Monitor
+                            </option>
+
+                            <option value="Server">
+                                Server
+                            </option>
+
+                            <option value="UPS">
+                                UPS
+                            </option>
+
+                            <option value="AVR">
+                                AVR
+                            </option>
+
+                            <option value="CCTV">
+                                CCTV
+                            </option>
+
+                            <option value="Network Device">
+                                Network Device
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Item Description
+                        </label>
+
+                        <textarea
+                            id="inventoryItemDescriptions"
+                            name="ItemDescriptions"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Brand
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryBrand"
+                            name="Brand"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Model
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryModel"
+                            name="Model"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Serial Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventorySerialNumber"
+                            name="SerialNumber"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Purchase Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryPurchaseDate"
+                            name="PurchaseDate"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-section">
+
+                <h3>
+                    Location & Condition
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryLocation"
+                            name="Location"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="inventoryStatus"
+                            name="Status"
+                        >
+
+                            <option value="Working">
+                                Working
+                            </option>
+
+                            <option value="Maintenance">
+                                Maintenance
+                            </option>
+
+                            <option value="Pull-out">
+                                Pull-out
+                            </option>
+
+                            <option value="Defective">
+                                Defective
+                            </option>
+
+                            <option value="Disposed">
+                                Disposed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Problem / Complaint
+                        </label>
+
+                        <textarea
+                            id="inventoryProblemComplaint"
+                            name="ProblemComplaint"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Recommendation
+                        </label>
+
+                        <textarea
+                            id="inventoryRecommendation"
+                            name="Recommendation"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-section">
+
+                <h3>
+                    Maintenance Information
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Pull-out
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryDatePullout"
+                            name="DatePull-out"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Return
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryDateReturn"
+                            name="DateReturn"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Place AT
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryPlaceAT"
+                            name="PlaceAT"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Checked By
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryCheckedby"
+                            name="Checkedby"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Clean Up
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryDateCleanUp"
+                            name="DateCleanUp"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Scheduled
+                        </label>
+
+                        <input
+                            type="text"
+                            id="inventoryScheduled"
+                            name="Scheduled"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Request
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryDateRequest"
+                            name="DateRequest"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date Checkup
+                        </label>
+
+                        <input
+                            type="date"
+                            id="inventoryDateCheckup"
+                            name="DateCheckup"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Remarks
+                        </label>
+
+                        <textarea
+                            id="inventoryRemarks"
+                            name="Remarks"
+                            rows="3"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-section">
+
+                <h3>
+                    Licensing
+                </h3>
+
+
+                <div class="checkbox-grid">
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="inventoryLicensedWindows"
+                            name="licensedwindow"
+                            value="Licensed"
+                        >
+
+                        <span>
+                            Licensed Windows
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="inventoryLicensedSecurity"
+                            name="licensedSecurity"
+                            value="Licensed"
+                        >
+
+                        <span>
+                            Licensed Security
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    data-close-modal="inventoryModal"
+                >
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="saveInventoryButton"
+                    class="primary-button"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Computer
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     REQUEST MODAL
+========================================================= -->
+
+<div
+    id="requestModal"
+    class="modal-overlay"
+    style="display:none;"
+>
+
+    <div class="modal-container">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    EQUIPMENT REQUEST
+                </span>
+
+                <h2 id="requestModalTitle">
+                    Add Request
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close-modal="requestModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+
+        <form
+            id="requestForm"
+            class="modal-form"
+        >
+
+            <input
+                type="hidden"
+                id="requestID"
+                name="ID"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Control Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestControlNumber"
+                        name="ControlNumber"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Custodian Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestCustodianName"
+                        name="CustodianName"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestDepartment"
+                        name="Department"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Item Type
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestItemType"
+                        name="ItemType"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="requestQuantity"
+                        name="Quantity"
+                        min="1"
+                        value="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Brand
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestBrand"
+                        name="Brand"
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Item Description
+                    </label>
+
+                    <textarea
+                        id="requestItemDescriptions"
+                        name="ItemDescriptions"
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestLocation"
+                        name="Location"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Date Request
+                    </label>
+
+                    <input
+                        type="date"
+                        id="requestDateRequest"
+                        name="DateRequest"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select
+                        id="requestStatus"
+                        name="Status"
+                    >
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Approved">
+                            Approved
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Proof Document
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requestProofDocument"
+                        name="ProofDocument"
+                        placeholder="Google Drive / document link"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    data-close-modal="requestModal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="saveRequestButton"
+                    class="primary-button"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Request
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     SCHEDULE MODAL
+========================================================= -->
+
+<div
+    id="scheduleModal"
+    class="modal-overlay"
+    style="display:none;"
+>
+
+    <div class="modal-container">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-kicker">
+                    SCHEDULE MANAGEMENT
+                </span>
+
+                <h2 id="scheduleModalTitle">
+                    Add Schedule
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close-modal="scheduleModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+
+        <form
+            id="scheduleForm"
+            class="modal-form"
+        >
+
+            <input
+                type="hidden"
+                id="scheduleID"
+                name="ID"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Branch
+                    </label>
+
+                    <input
+                        type="text"
+                        id="scheduleBranch"
+                        name="Branch"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Type Schedule
+                    </label>
+
+                    <select
+                        id="scheduleTypeSchedule"
+                        name="TypeSchedule"
+                    >
+
+                        <option value="">
+                            Select Type
+                        </option>
+
+                        <option value="Maintenance">
+                            Maintenance
+                        </option>
+
+                        <option value="Inspection">
+                            Inspection
+                        </option>
+
+                        <option value="Cleaning">
+                            Cleaning
+                        </option>
+
+                        <option value="Repair">
+                            Repair
+                        </option>
+
+                        <option value="Inventory">
+                            Inventory
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Date Start
+                    </label>
+
+                    <input
+                        type="date"
+                        id="scheduleDateStart"
+                        name="DateStart"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Date End
+                    </label>
+
+                    <input
+                        type="date"
+                        id="scheduleDateEnd"
+                        name="DateEnd"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Days
+                    </label>
+
+                    <input
+                        type="number"
+                        id="scheduleDays"
+                        name="Days"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Assigned Personnel
+                    </label>
+
+                    <input
+                        type="text"
+                        id="scheduleAsignPersonel"
+                        name="AsignPersonel"
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Purpose
+                    </label>
+
+                    <textarea
+                        id="schedulePurpose"
+                        name="Purpose"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Task Accomplishment
+                    </label>
+
+                    <textarea
+                        id="scheduleTaskAccomplishment"
+                        name="TaskAccomplishment"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    data-close-modal="scheduleModal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="saveScheduleButton"
+                    class="primary-button"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Schedule
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     DELETE CONFIRMATION MODAL
+========================================================= -->
+
+<div
+    id="deleteModal"
+    class="modal-overlay"
+    style="display:none;"
+>
+
+    <div class="modal-container small-modal">
+
+
+        <div class="delete-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+
+        <h2>
+            Delete Record?
+        </h2>
+
+
+        <p id="deleteMessage">
+
+            Are you sure you want to delete this record?
+
+        </p>
+
+
+        <div class="modal-footer centered">
+
+            <button
+                type="button"
+                class="secondary-button"
+                data-close-modal="deleteModal"
+            >
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmDeleteButton"
+                class="danger-button"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     TOAST NOTIFICATION
+========================================================= -->
+
+<div
+    id="toastContainer"
+    class="toast-container"
+></div>
+
+
+
+
+
+<!-- =========================================================
+     LOADING OVERLAY
+========================================================= -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay"
+    style="display:none;"
+>
+
+    <div class="loading-card">
+
+        <div class="loading-spinner">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+        </div>
+
+
+        <h3 id="loadingTitle">
+            Loading
+        </h3>
+
+
+        <p id="loadingMessage">
+            Please wait...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     APPLICATION JAVASCRIPT
+========================================================= -->
+
+<script src="js/inventory.js"></script>
+
+
+<!-- =========================================================
+     LOGIN YEAR
+========================================================= -->
+
+<script>
+
+    document.getElementById("loginYear").textContent =
+        new Date().getFullYear();
+
+</script>
+
+
+</body>
+</html>
