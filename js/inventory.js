@@ -16,7 +16,7 @@
  */
 
 const GOOGLE_SCRIPT_URL =
-    "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+    "https://script.google.com/macros/s/AKfycbzU_H_Sr_DV0f-GMYNQLZW1jhX5TQ2lhts6itIjMyi1SMZo47V0zZtjzQ8LqB0Su_t2/exec";
 
 
 /*
