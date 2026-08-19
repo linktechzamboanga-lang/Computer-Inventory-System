@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Computer Inventory</title>
+
+  <link rel="stylesheet" href="css/inventory.css">
+
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginPage" class="container">
+
+    <div class="login-box">
+      <h2>Admin Login</h2>
+
+      <input type="text" id="username" placeholder="Username">
+
+      <input type="password" id="password" placeholder="Password">
+
+      <button onclick="login()">Sign In</button>
+
+      <p id="loginMsg"></p>
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH PAGE -->
+  <div id="searchPage" class="container" style="display:none;">
+
+    <div class="search-box">
+
+      <h2>Computer Inventory</h2>
+
+      <input
+        type="text"
+        id="controlNumber"
+        placeholder="Enter Control Number">
+
+      <button onclick="searchInventory()">Search</button>
+
+    </div>
+
+
+    <!-- RESULT -->
+    <div id="result" class="result" style="display:none;">
+
+      <h3>Computer Details</h3>
+
+      <table>
+
+        <tr><td>Control No.</td><td id="dControl"></td></tr>
+
+        <tr><td>Custodian</td><td id="dCustodian"></td></tr>
+
+        <tr><td>Department</td><td id="dDepartment"></td></tr>
+
+        <tr><td>Item Type</td><td id="dItem"></td></tr>
+
+        <tr><td>Brand</td><td id="dBrand"></td></tr>
+
+        <tr><td>Model</td><td id="dModel"></td></tr>
+
+        <tr><td>Serial No.</td><td id="dSerial"></td></tr>
+
+        <tr><td>Location</td><td id="dLocation"></td></tr>
+
+        <tr><td>Status</td><td id="dStatus"></td></tr>
+
+        <tr><td>Remarks</td><td id="dRemarks"></td></tr>
+
+      </table>
+
+      <div class="qr-section">
+
+        <canvas id="qrcode"></canvas>
+
+        <button onclick="downloadQR()">Download QR</button>
+
+        <button onclick="window.print()">Print QR</button>
+
+      </div>
+
+    </div>
+
+    <p id="searchMsg"></p>
+
+  </div>
+
+  <script src="js/inventory.js"></script>
+
+</body>
+</html>
