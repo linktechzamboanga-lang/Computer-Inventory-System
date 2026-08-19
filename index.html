@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#2563eb"
+    >
+
+    <title>
+        Computer Inventory
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="css/inventory.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+====================================================== -->
+
+<section
+    id="loginPage"
+    class="login-page"
+>
+
+
+    <div class="login-card">
+
+
+        <div class="brand-icon">
+            💻
+        </div>
+
+
+        <h1>
+            Computer Inventory
+        </h1>
+
+
+        <p class="subtitle">
+            Administrator Access
+        </p>
+
+
+        <form
+            id="loginForm"
+        >
+
+
+            <div class="input-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    autocomplete="username"
+                    placeholder="Enter username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Enter password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                id="loginButton"
+                type="submit"
+                class="primary-button"
+            >
+                Sign In
+            </button>
+
+
+        </form>
+
+
+        <div
+            id="loginStatus"
+            class="status-message"
+        ></div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     INVENTORY PAGE
+====================================================== -->
+
+<section
+    id="inventoryPage"
+    class="inventory-page hidden"
+>
+
+
+    <header class="topbar">
+
+
+        <div>
+
+            <div class="brand-title">
+                💻 Computer Inventory
+            </div>
+
+            <div class="brand-subtitle">
+                Administrator Portal
+            </div>
+
+        </div>
+
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+            type="button"
+        >
+            Logout
+        </button>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         SEARCH
+    ================================================== -->
+
+    <main class="container">
+
+
+        <section class="search-card">
+
+
+            <div class="section-title">
+
+                <h2>
+                    Find Computer
+                </h2>
+
+                <p>
+                    Search by Control Number only.
+                </p>
+
+            </div>
+
+
+            <form
+                id="searchForm"
+                class="search-form"
+            >
+
+
+                <input
+                    id="controlNumber"
+                    type="text"
+                    placeholder="Example: PC-000001"
+                    autocomplete="off"
+                >
+
+
+                <button
+                    id="searchButton"
+                    type="submit"
+                    class="primary-button"
+                >
+                    Search
+                </button>
+
+
+            </form>
+
+
+            <div
+                id="searchStatus"
+                class="status-message"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================== -->
+
+        <section
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <div class="empty-icon">
+                🔎
+            </div>
+
+            <h3>
+                Search Computer Inventory
+            </h3>
+
+            <p>
+                Enter a Control Number to view
+                the computer information.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INVENTORY RESULT
+        ================================================== -->
+
+        <section
+            id="inventoryResult"
+            class="inventory-result hidden"
+        >
+
+
+            <div class="result-header">
+
+
+                <div>
+
+                    <span class="result-label">
+                        CONTROL NUMBER
+                    </span>
+
+                    <h2
+                        id="displayControlNumber"
+                    >
+                        -
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="displayStatus"
+                    class="status-badge"
+                >
+                    -
+                </span>
+
+
+            </div>
+
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-item">
+                    <span>Custodian</span>
+                    <strong id="dCustodian">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Department</span>
+                    <strong id="dDepartment">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Item Type</span>
+                    <strong id="dItemType">-</strong>
+                </div>
+
+
+                <div class="detail-item full">
+                    <span>Description</span>
+                    <strong id="dDescription">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Brand</span>
+                    <strong id="dBrand">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Model</span>
+                    <strong id="dModel">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Serial Number</span>
+                    <strong id="dSerialNumber">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Purchase Date</span>
+                    <strong id="dPurchaseDate">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Location</span>
+                    <strong id="dLocation">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Status</span>
+                    <strong id="dStatusDetail">-</strong>
+                </div>
+
+
+                <div class="detail-item full">
+                    <span>Problem / Complaint</span>
+                    <strong id="dProblemComplaint">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Date Pull-out</span>
+                    <strong id="dDatePullout">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Date Return</span>
+                    <strong id="dDateReturn">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Place AT</span>
+                    <strong id="dPlaceAT">-</strong>
+                </div>
+
+
+                <div class="detail-item full">
+                    <span>Remarks</span>
+                    <strong id="dRemarks">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Licensed Windows</span>
+                    <strong id="dWindows">-</strong>
+                </div>
+
+
+                <div class="detail-item">
+                    <span>Licensed Security</span>
+                    <strong id="dSecurity">-</strong>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 QR CODE
+            ================================================== -->
+
+            <section class="qr-section">
+
+
+                <h3>
+                    Computer QR Code
+                </h3>
+
+
+                <p>
+                    Attach this QR code to the hardware.
+                </p>
+
+
+                <div class="qr-container">
+
+                    <canvas
+                        id="qrCanvas"
+                    ></canvas>
+
+                </div>
+
+
+                <h4
+                    id="qrControlNumber"
+                >
+                    -
+                </h4>
+
+
+                <div class="qr-buttons">
+
+
+                    <button
+                        id="downloadQRButton"
+                        type="button"
+                        class="primary-button"
+                    >
+                        Download QR
+                    </button>
+
+
+                    <button
+                        id="printQRButton"
+                        type="button"
+                        class="secondary-button"
+                    >
+                        Print QR Sticker
+                    </button>
+
+
+                </div>
+
+
+                <div
+                    id="qrStatus"
+                    class="status-message"
+                ></div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+
+</section>
+
+
+
+<!-- QR CODE LIBRARY -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"
+></script>
+
+
+<!-- APPLICATION JAVASCRIPT -->
+
+<script
+    src="js/inventory.js"
+></script>
+
+
+</body>
+
+</html>
