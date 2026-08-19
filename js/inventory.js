@@ -1,20 +1,3 @@
-/* =========================================================
-   COMPUTER INVENTORY
-   inventory.js
-========================================================= */
-
-
-/*
- * =========================================================
- * GOOGLE APPS SCRIPT WEB APP URL
- * =========================================================
- *
- * Example:
- *
- * https://script.google.com/macros/s/XXXXXXXX/exec
- *
- */
-
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbzU_H_Sr_DV0f-GMYNQLZW1jhX5TQ2lhts6itIjMyi1SMZo47V0zZtjzQ8LqB0Su_t2/exec";
 
