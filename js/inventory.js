@@ -1791,30 +1791,18 @@ function showLoginPage() {
    API REQUEST
 ========================================================= */
 
-async function apiRequest(
-    payload
-) {
+async function apiRequest(payload){
 
+  const response = await fetch(GOOGLE_SCRIPT_URL,{
+    method:"POST",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+    body:JSON.stringify(payload)
+  });
 
-    /*
-     * Check URL
-     */
-
-    if (
-        !GOOGLE_SCRIPT_URL ||
-        GOOGLE_SCRIPT_URL.includes(
-            "YOUR_GOOGLE_APPS_SCRIPT"
-        )
-    ) {
-
-
-        throw new Error(
-
-            "Google Apps Script URL has not been configured."
-
-        );
-
-    }
+  return await response.json();
+}
 
 
     /*
